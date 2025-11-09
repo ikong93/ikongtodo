@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Header from './components/Header';
 import CheckList from './components/CheckList';
@@ -90,7 +89,7 @@ function useLocalStorageLoad(setTasks, setSelectedDate, todayStr) {
       console.error('[localStorage] failed to read selectedDate', e);
     }
     // run once on mount
-  }, []);
+  }, [setTasks, setSelectedDate, todayStr]);
 }
 
 // Persist tasks and selectedDate
