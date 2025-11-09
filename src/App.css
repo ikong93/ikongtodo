@@ -5,13 +5,25 @@
   --header-text: #e6eef8;
   --accent: #60a5fa;
   --accent-weak: rgba(96,165,250,0.06);
-  --card-bg: rgba(255,255,255,0.03);
-  --text: #e6eef8;
-  --muted: rgba(230,238,248,0.65);
+  --card-bg: rgba(255,255,255,0.045);
+  --card-border: rgba(255,255,255,0.04);
+  --text: #e9f0fb;
+  --muted: rgba(233,240,251,0.7);
   --danger: #fb7185;
   --success: #34d399;
   --input-border: rgba(255,255,255,0.06);
   --panel-shadow: 0 12px 40px rgba(2,6,23,0.6);
+}
+
+/* App background and base text color */
+.App {
+  min-height: 100vh;
+  color: var(--text);
+  background: radial-gradient(800px 400px at 10% 10%, rgba(96,165,250,0.06), transparent 8%),
+              linear-gradient(180deg, var(--page-bg-1) 0%, var(--page-bg-2) 100%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 28px;
 }
 
 
@@ -34,17 +46,18 @@ header > div {
 header p {
   margin: 0;
   font-size: 0.95rem;
-  color: rgba(255,255,255,0.85);
+  color: var(--muted);
 }
 
 /* Calendar indicator and selected date styles */
 .calendar-table { border-collapse: collapse; }
 .calendar-table th, .calendar-table td { width: 64px; height: 64px; text-align: center; vertical-align: middle; }
-.calendar { background: var(--card-bg); padding: 22px; border-radius: 14px; box-shadow: var(--panel-shadow); transition: transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms ease; }
+.calendar { background: var(--card-bg); padding: 22px; border-radius: 14px; box-shadow: var(--panel-shadow); transition: transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms ease; border: 1px solid var(--card-border); backdrop-filter: blur(6px); }
 .calendar:hover { transform: translateY(-6px); box-shadow: 0 26px 60px rgba(2,6,23,0.6); }
 .calendar-header { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:12px; }
 .calendar-title { font-weight:600; font-size:1.15rem; }
 .calendar-table th { font-size:0.85rem; color: var(--muted); padding-bottom:8px; }
+.calendar-table td { color: var(--text); }
 .calendar-day { cursor: pointer; padding: 8px; border-radius:8px; position: relative; transition: background-color 120ms ease, transform 120ms ease; }
 .calendar-day:hover { background: rgba(96,165,250,0.07); transform: translateY(-4px); }
 .calendar-empty { background: transparent; }
@@ -54,22 +67,24 @@ header p {
 .calendar-day.selected { outline: 3px solid rgba(96,165,250,0.18); background: rgba(96,165,250,0.05); }
 
 /* Checklist layout and style */
-.checklist { background: rgba(255,255,255,0.02); padding: 24px 26px; border-radius: 14px; box-shadow: var(--panel-shadow); width: 520px; transition: transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms ease; }
+.checklist { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding: 24px 26px; border-radius: 14px; box-shadow: var(--panel-shadow); width: 520px; transition: transform 220ms cubic-bezier(.2,.9,.2,1), box-shadow 220ms ease; border: 1px solid var(--card-border); backdrop-filter: blur(6px); }
 .checklist:hover { transform: translateY(-5px); box-shadow: 0 26px 60px rgba(2,6,23,0.6); }
 .checklist h1 { margin: 0 0 12px 0; font-size: 1.5rem; text-align: center; }
-.checklist input[type="text"] { width: calc(100% - 120px); padding: 16px 16px; font-size: 1.15rem; border-radius: 12px; border: 1px solid var(--input-border); margin-right:12px; background: rgba(255,255,255,0.02); color: var(--text); }
+.checklist input[type="text"] { width: calc(100% - 120px); padding: 14px 14px; font-size: 1.05rem; border-radius: 10px; border: 1px solid rgba(255,255,255,0.06); margin-right:12px; background: rgba(255,255,255,0.02); color: var(--text); }
 .checklist > div { display:flex; align-items:center; justify-content: center; margin-bottom:18px; }
-.checklist button { background: var(--accent); color: #032; border: none; padding: 12px 16px; border-radius: 12px; font-weight:800; cursor:pointer; transition: transform 120ms ease, box-shadow 120ms ease; }
+.checklist button { background: var(--accent); color: #042231; border: none; padding: 12px 16px; border-radius: 12px; font-weight:800; cursor:pointer; transition: transform 120ms ease, box-shadow 120ms ease; }
 .checklist button[aria-label="Add task"] { width:44px; height:44px; padding:0; font-size:1.25rem; display:inline-flex; align-items:center; justify-content:center; }
 .checklist button:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(97,218,251,0.18); }
-.checklist h2 { margin: 4px 0 12px 0; font-size: 1rem; color:#333; }
+.checklist h2 { margin: 4px 0 12px 0; font-size: 1rem; color: var(--muted); }
 .checklist .progress { width: 100%; height: 12px; background: rgba(255,255,255,0.03); border-radius: 10px; overflow: hidden; margin: 6px 0 8px; }
 .checklist .progress-bar { height: 100%; background: linear-gradient(90deg, var(--accent), #3b82f6); width: 0%; transition: width 360ms cubic-bezier(.2,.9,.2,1); box-shadow: 0 6px 18px rgba(59,130,246,0.14) inset; }
 .checklist .progress-meta { font-size: 0.9rem; color: var(--muted); text-align: center; margin-bottom: 12px; }
 .checklist ul { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px; max-height:480px; overflow:auto; }
-.checklist li { padding:12px 14px; border-radius:10px; display:flex; align-items:center; gap:12px; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); }
+.checklist li { padding:12px 14px; border-radius:10px; display:flex; align-items:center; gap:12px; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); color: var(--text); }
 .checklist li input[type="checkbox"] { width:20px; height:20px; }
 .checklist li button { margin-left:auto; background:transparent; color:var(--muted); border:none; font-weight:800; font-size:0.95rem; padding:8px 10px; cursor:pointer; }
+.checklist li .task-text { cursor: pointer; flex: 1; outline: none; }
+.checklist li .task-text:focus { box-shadow: 0 0 0 3px rgba(96,165,250,0.12); border-radius: 6px; }
 .checklist li button:hover { color: var(--danger); }
 
 /* Main layout: side-by-side on wide screens, stacked on small screens */

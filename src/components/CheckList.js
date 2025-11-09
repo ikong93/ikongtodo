@@ -47,7 +47,16 @@ function CheckList({ tasks = [], selectedDate, onAddTask, onRemoveTask, onToggle
                             checked={task.done}
                             onChange={() => onToggleTask && onToggleTask(task.id)}
                         />
-                        <span style={{ textDecoration: task.done ? 'line-through' : 'none' }}>{task.text}</span>
+                        <span
+                            role="button"
+                            tabIndex={0}
+                            className="task-text"
+                            onClick={() => onToggleTask && onToggleTask(task.id)}
+                            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onToggleTask && onToggleTask(task.id); } }}
+                            style={{ textDecoration: task.done ? 'line-through' : 'none' }}
+                        >
+                            {task.text}
+                        </span>
                         <button onClick={() => onRemoveTask && onRemoveTask(task.id)} aria-label={`Delete task ${task.text}`}>DELETE</button>
                     </li>
                 ))}
